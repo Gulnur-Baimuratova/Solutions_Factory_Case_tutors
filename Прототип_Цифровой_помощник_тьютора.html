@@ -1,0 +1,426 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Академия маленьких наук · Цифровой помощник тьютора (прототип)</title><style>:root{--bg:#F3EEE4;--cream:#FBF7F0;--card:#fff;--ink:#2B2A27;--muted:#7C766C;--line:#E8E0D2;--forest:#2F6B4F;--forest2:#E3EFE7;--fox:#D9733B;--fox2:#FBE9DD;--g:#3E9B5B;--y:#E6B43C;--r:#D5534C;--g2:#E4F3E8;--y2:#FCF3DA;--r2:#FBE6E4;--sky:#3D6E8C;--sky2:#E3EDF3}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:14px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:14px 24px;background:#fff;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px}.logo .mk{width:36px;height:36px;border-radius:50%;background:var(--forest);display:grid;place-items:center;color:#fff;font-size:18px}
+.logo b{font-family:Georgia,serif;font-size:16px;display:block}.logo small{color:var(--muted);font-size:11.5px}
+.roles{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}.roles button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;cursor:pointer}
+.roles button.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+.demo-btn{font:inherit;border:0;background:var(--fox);color:#fff;border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:600}
+.wrap{display:grid;grid-template-columns:1fr 400px 1fr;gap:28px;padding:24px;align-items:start;max-width:1400px;margin:0 auto}
+.side{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;font-size:13px}
+.side h3{margin:0 0 8px;font-size:14px}.side p{margin:6px 0;color:#4A463F}
+.phone{width:390px;height:800px;background:#1f1f1f;border-radius:44px;padding:12px;box-shadow:0 20px 50px rgba(0,0,0,.18);position:relative}
+.screen{width:100%;height:100%;background:var(--cream);border-radius:34px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.sbar{display:flex;justify-content:space-between;padding:10px 22px 4px;font-size:12px;font-weight:600}
+.top{display:flex;align-items:center;gap:8px;padding:6px 16px 10px}.top h2{font-size:18px;margin:0;flex:1}.back{border:0;background:none;font-size:22px;cursor:pointer;padding:0 4px;color:var(--forest)}
+.body{flex:1;overflow:auto;padding:0 14px 90px}
+.tabs{position:absolute;bottom:0;left:0;right:0;display:flex;background:#fff;border-top:1px solid var(--line);padding:6px 4px 14px}
+.tabs button{flex:1;border:0;background:none;font:inherit;font-size:11px;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+.tabs button .i{font-size:18px}.tabs button.on{color:var(--forest);font-weight:700}
+.card{background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:10px;border:1px solid var(--line)}
+.card h4{margin:0 0 6px;font-size:14px}
+.kid{display:flex;align-items:center;gap:12px;cursor:pointer}.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;flex:none}
+.kid .t{flex:1}.kid .t b{display:block}.muted{color:var(--muted)}.small{font-size:12px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle}.dot.g{background:var(--g)}.dot.y{background:var(--y)}.dot.r{background:var(--r)}
+.chip{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.cg{background:var(--g2);color:#2B6E40}.cy{background:var(--y2);color:#8A6412}.cr{background:var(--r2);color:#A8322C}.cf{background:var(--fox2);color:#A4501F}.cs{background:var(--sky2);color:var(--sky)}.cgr{background:#EEEAE2;color:var(--muted)}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}.seg button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer}
+.seg button.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.lbl{font-size:12px;color:var(--muted);margin-top:8px}
+.pre{font-size:11.5px;color:var(--forest);background:var(--forest2);border-radius:8px;padding:3px 8px;display:inline-block;margin-top:4px}
+.epbtn{border:1px dashed var(--fox);color:var(--fox);background:#fff}
+.ep{display:flex;justify-content:space-between;align-items:center;background:var(--fox2);border-radius:10px;padding:6px 10px;margin-top:6px;font-size:12.5px}
+textarea{width:100%;font:inherit;border:1px solid var(--line);border-radius:10px;padding:8px;min-height:62px;resize:vertical}
+.btn{font:inherit;border:0;border-radius:12px;padding:11px 14px;cursor:pointer;font-weight:600;background:var(--forest);color:#fff}
+.btn.full{width:100%}.btn.ghost{background:#fff;color:var(--forest);border:1px solid var(--forest)}.btn.fox{background:var(--fox)}.btn.sm{padding:7px 10px;font-size:12.5px;border-radius:10px}
+.warn{background:var(--y2);border-radius:10px;padding:8px 10px;font-size:12.5px;margin-top:8px}
+.ai{background:var(--sky2);border-radius:10px;padding:8px 10px;font-size:12.5px;margin-top:8px}
+.ribbon{display:grid;gap:3px;margin:6px 0}.ribbon i{height:18px;border-radius:4px;display:block}
+.ribbon i.g{background:var(--g)}.ribbon i.y{background:var(--y)}.ribbon i.r{background:var(--r)}
+.prow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #F1ECE3}.prow:last-child{border:0}.prow .n{width:96px;font-size:13px}
+.sp{flex:1}
+.hint{border-left:4px solid var(--sky)}.hint .st{display:grid;grid-template-columns:1fr auto;gap:2px 8px;font-size:12.5px;margin:8px 0;background:#F7F4EE;border-radius:10px;padding:8px 10px}
+.hint details summary{cursor:pointer;color:var(--sky);font-weight:600;font-size:12.5px}
+.drow{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px dashed #EEE7DB}
+.acts{display:flex;gap:6px;margin-top:10px}
+.toast{position:absolute;left:14px;right:14px;top:60px;background:var(--ink);color:#fff;border-radius:14px;padding:10px 12px;font-size:12.5px;z-index:30;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.sheet{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:flex-end;z-index:20}.sheet .in{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:16px;max-height:80%;overflow:auto}
+.bar{height:6px;background:#EEE7DB;border-radius:9px;overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--forest)}
+table.m{width:100%;border-collapse:collapse;font-size:12px}table.m td,table.m th{padding:5px 4px;border-bottom:1px solid #EEE7DB;text-align:left}table.m th{color:var(--muted);font-weight:600}
+table.acc{width:100%;border-collapse:collapse;font-size:11.5px}table.acc td,table.acc th{border:1px solid var(--line);padding:4px 5px;vertical-align:top}table.acc th{background:#F7F3EC}table.acc .cur{background:var(--forest2);font-weight:600}
+.log div{font-size:11.5px;padding:3px 0;border-bottom:1px dashed var(--line)}
+.lock{background:#F2EEE7;border-radius:12px;padding:10px;color:var(--muted);font-size:12.5px;text-align:center}
+.demo{position:fixed;right:20px;bottom:20px;width:340px;background:var(--ink);color:#F4EFE6;border-radius:16px;padding:14px 16px;z-index:50;display:none;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.demo .s{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#F3B58D}.demo h4{margin:6px 0}.demo p{font-size:13px;color:#DAD3C7;margin:0 0 10px}.demo .row{display:flex;gap:8px;justify-content:flex-end}
+.demo .row button{font:inherit;border-radius:10px;padding:6px 12px;cursor:pointer;border:1px solid #5A554D;background:transparent;color:#fff}.demo .row button.go{background:var(--fox);border-color:var(--fox)}
+.hl{outline:3px solid var(--fox);outline-offset:2px;border-radius:14px}
+@media(max-width:1150px){.wrap{grid-template-columns:400px 1fr}.wrap .left{display:none}}
+@media(max-width:760px){.wrap{grid-template-columns:1fr;padding:10px}.phone{width:100%;max-width:400px;margin:0 auto}.wrap .right{order:2}}
+</style></head><body>
+<header><div class="logo"><div class="mk">🦊</div><div><b>Академия маленьких наук</b><small>Цифровой помощник тьютора · прототип</small></div></div>
+<div class="roles"><button data-r="tutor">Тьютор</button><button data-r="spec">Специалист</button><button data-r="parent">Родитель</button><button data-r="doctor">Врач</button></div>
+<button class="demo-btn" onclick="demo(0)">▶ Демо-сценарий</button></header>
+<div class="wrap"><div class="side left" id="left"></div><div class="phone"><div class="screen" id="screen"></div></div><div class="side right" id="right"></div></div>
+<div class="demo" id="demo"></div><script>// ===== Синтетические данные (условные дети, имена изменены) =====
+let _s=20260930; const rnd=()=>{_s=(_s*1103515245+12345)%2147483648; return _s/2147483648;};
+const pick=a=>a[Math.floor(rnd()*a.length)];
+const TODAY=new Date(2026,8,30); // 30.09.2026, среда
+const DAYMS=86400000;
+const fmtD=d=>d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'});
+const fmtDL=d=>d.toLocaleDateString('ru-RU',{day:'numeric',month:'long'});
+const WD=['вс','пн','вт','ср','чт','пт','сб'];
+// 90 рабочих дней наблюдений до вчера
+const DAYS=[]; (function(){let d=new Date(TODAY.getTime()-DAYMS); while(DAYS.length<90){ if(d.getDay()!==0&&d.getDay()!==6) DAYS.unshift(new Date(d)); d=new Date(d.getTime()-DAYMS);} })();
+const N=DAYS.length, W0=N-60; // окно анализа — последние 60 дней наблюдений
+
+const CHILDREN=[
+ {id:'c1',name:'Миша К.',age:'6 лет',diag:'РАС',tutor:'Анна Сергеевна',parent:'Мама — Ольга К.',doctorConsent:true,
+  iom:[{g:'Просит помощь словами или карточкой PECS',p:55},{g:'Выдерживает групповое занятие 15 минут',p:40},{g:'Самостоятельно моет руки по визуальному расписанию',p:80}],
+  sensory:'Гиперчувствителен к громким звукам; ищет глубокое давление (утяжелённый жилет помогает); избегает липких текстур.',
+  anamnesis:'РАС, заключение ЦПМПК от 03.2025. Наблюдается у невролога. Нарушения сна в анамнезе.'},
+ {id:'c2',name:'Алиса Р.',age:'5 лет',diag:'ЗПР',tutor:'Анна Сергеевна',parent:'Папа — Игорь Р.',doctorConsent:false,
+  iom:[{g:'Отвечает на вопросы «кто?», «что?» фразой из 2–3 слов',p:70},{g:'Играет рядом со сверстником 10 минут',p:50},{g:'Ест в общей столовой',p:35}],
+  sensory:'Чувствительна к шуму и многолюдным помещениям; в тишине ест и общается лучше.',
+  anamnesis:'ЗПР, заключение ЦПМПК от 05.2025.'},
+ {id:'c3',name:'Тимур С.',age:'7 лет',diag:'ТНР',tutor:'Анна Сергеевна',parent:'Мама — Диляра С.',doctorConsent:true,
+  iom:[{g:'Произносит звук [р] в словах',p:30},{g:'Пересказывает короткий текст по картинкам',p:60},{g:'Соблюдает очерёдность в игре',p:75}],
+  sensory:'Без выраженных сенсорных особенностей.',
+  anamnesis:'ОНР II уровня (ТНР). Наблюдается у логопеда и педиатра.'},
+];
+const C=Object.fromEntries(CHILDREN.map(c=>[c.id,c]));
+const EP_TYPES=['Агрессия','Самоагрессия','Крик','Уход','Стереотипии'];
+const ANTE=['Требование','Шум','Переход','Отказ в желаемом','Не установлено'];
+function idxSet(from,to,k,avoid=new Set(),must=[]){const s=new Set(must);while(s.size<k){const i=from+Math.floor(rnd()*(to-from));if(!avoid.has(i))s.add(i);}return s;}
+const OBS={};
+function baseRec(i,cid){
+  return {id:`OBS-${cid.toUpperCase()}-${String(i+1).padStart(3,'0')}`,date:DAYS[i],author:'Анна Сергеевна (тьютор)',ver:1,
+    sleepH:8+Math.round((rnd()*1.6-0.4)*2)/2, sleepQ:2, sleepSrc:'родитель',
+    food:[2,2,2], mood:3+(rnd()<0.35?1:0)-(rnd()<0.15?1:0), init:rnd()<0.5?1:0, speech:3, episodes:[], sensory:[], env:{schedule:rnd()<0.06,newPerson:rnd()<0.04,noise:rnd()<0.05,ill:false}, comment:''};
+}
+(function gen(){
+ // --- Миша: связь «сон < 8 ч → агрессия»: 14 дней недосыпа, из них 10 с агрессией; 46 других, из них 7 с агрессией
+ const a=[]; for(let i=0;i<N;i++) a.push(baseRec(i,'c1'));
+ const short=idxSet(W0,N,14,new Set(),[N-1,N-2,W0+5,W0+26,W0+44]);
+ const shortArr=[...short]; const aggS=new Set([N-1,N-2,...shortArr.filter(i=>i<N-2).slice(0,8)]);
+ const others=[...Array(60).keys()].map(k=>W0+k).filter(i=>!short.has(i)); const aggO=new Set(); while(aggO.size<7) aggO.add(pick(others));
+ for(let i=0;i<W0;i++){ if(rnd()<0.2){a[i].sleepH=6.5+(rnd()<0.5?0.5:0); if(rnd()<0.7)a[i].episodes.push({t:'Агрессия',n:1+(rnd()<0.4?1:0),ante:pick(ANTE),dur:3});} else if(rnd()<0.12) a[i].episodes.push({t:'Агрессия',n:1,ante:pick(ANTE),dur:2}); }
+ for(let i=W0;i<N;i++){ const r=a[i]; if(short.has(i)){r.sleepH=6+Math.round(rnd()*3)/2; r.sleepQ=1;} else if(r.sleepH<8) r.sleepH=8;
+   if(aggS.has(i)||aggO.has(i)){ r.episodes.push({t:'Агрессия',n:1+(short.has(i)&&rnd()<0.5?1:0),ante:short.has(i)?pick(['Требование','Переход','Не установлено']):pick(ANTE),dur:2+Math.floor(rnd()*4)}); r.mood=Math.max(1,r.mood-1); } }
+ for(let i=0;i<N;i++){ const r=a[i]; r.speech=Math.min(5,2+Math.round(i/N*1.4+rnd()*0.8)); r.init=i>N*0.6?(rnd()<0.7?1:0):(rnd()<0.4?1:0); if(rnd()<0.25) r.episodes.push({t:'Стереотипии',n:1+Math.floor(rnd()*3),ante:'Не установлено',dur:1}); if(rnd()<0.2) r.sensory.push({s:'Шум',r:'избегает'}); }
+ a[N-1].comment='С утра вялый, мама сказала, что уснул поздно. На математике оттолкнул соседа, когда попросили сменить задание. После сенсорной паузы успокоился.';
+ a[N-2].comment='Трудно переключался между занятиями, на прогулке кричал.'; a[N-2].episodes.push({t:'Крик',n:1,ante:'Переход',dur:2});
+ a[N-1].mood=2; a[N-2].mood=2;
+ OBS.c1=a;
+ // --- Алиса: связь «шум → проблемы с едой»; коммуникация заметно растёт
+ const b=[]; for(let i=0;i<N;i++){const r=baseRec(i,'c2'); r.env.noise=false; b.push(r);}
+ const noise=idxSet(W0,N,10,new Set(),[W0+3,W0+30,W0+52]); const nArr=[...noise]; const fN=new Set(nArr.slice(0,7));
+ const oth=[...Array(60).keys()].map(k=>W0+k).filter(i=>!noise.has(i)); const fO=new Set(); while(fO.size<6) fO.add(pick(oth));
+ for(let i=0;i<N;i++){ const r=b[i]; r.speech=Math.min(5,1+Math.round(i/N*3+rnd()*0.6)); r.init=i>N*0.5?(rnd()<0.8?1:(rnd()<0.5?2:0)):(rnd()<0.3?1:0);
+   if(i>=W0){ if(noise.has(i)){r.env.noise=true; r.sensory.push({s:'Шум',r:'избегает'});} if(fN.has(i)||fO.has(i)){ r.food=[2,rnd()<0.5?0:1,1]; r.mood=Math.max(1,r.mood-1);} }
+   else if(rnd()<0.12){ r.env.noise=true; if(rnd()<0.6) r.food=[2,1,1]; } }
+ b[N-1].comment='Хорошо включилась в игру с Соней, сама попросила мяч фразой «дай мяч».';
+ OBS.c2=b;
+ // --- Тимур: без выраженных связей; последние 2 дня отказ от еды (критическое событие)
+ const c=[]; for(let i=0;i<N;i++){const r=baseRec(i,'c3'); r.speech=Math.min(5,2+Math.round(i/N*1.2+rnd()*0.7)); r.init=rnd()<0.7?1:2; r.env.noise=false; c.push(r);}
+ c[N-1].food=[0,0,1]; c[N-2].food=[0,0,0]; c[N-1].mood=2; c[N-2].mood=2; c[N-1].comment='Отказался от завтрака и обеда, жаловался, что болит горло.'; c[N-1].env.ill=true;
+ OBS.c3=c;
+})();
+// Уже принятые ранее решения по подсказкам (история для метрики)
+const DECISIONS=[
+ {cid:'c1',title:'Переход между занятиями → крик',st:'accepted',date:'12.09',by:'Е. В. Логинова, дефектолог'},
+ {cid:'c2',title:'Утренняя игра с одним сверстником → выше коммуникация',st:'accepted',date:'10.09',by:'Е. В. Логинова, дефектолог'},
+ {cid:'c3',title:'Понедельник → ниже речевая активность',st:'rejected',date:'05.09',by:'М. А. Сафина, логопед',reason:'Банальная связь: после выходных нужна разминка, уже учтено в ИОМ'},
+ {cid:'c1',title:'Утяжелённый жилет → меньше стереотипий',st:'edited',date:'03.09',by:'Е. В. Логинова, дефектолог'},
+];
+const LESSONS={
+ c1:[{d:'29.09',who:'Дефектолог',goal:'Просьба о помощи карточкой PECS',res:'4 из 6 проб самостоятельно',video:true},{d:'25.09',who:'Логопед',goal:'Звукоподражания',res:'Повторяет 5 из 8',video:false},{d:'23.09',who:'Дефектолог',goal:'Групповое занятие 15 мин',res:'Выдержал 11 минут',video:true}],
+ c2:[{d:'29.09',who:'Логопед',goal:'Фраза из 2–3 слов',res:'8 фраз за занятие',video:true},{d:'24.09',who:'Психолог',goal:'Игра рядом со сверстником',res:'9 минут',video:false}],
+ c3:[{d:'28.09',who:'Логопед',goal:'Звук [р] в слогах',res:'Изолированно устойчиво, в слогах 50%',video:true}],
+};
+// ===== Расчётное ядро: светофор и поиск связей (детерминированно) =====
+const PARAMS=[
+ {k:'sleep',n:'Сон',v:r=>r.sleepH,better:1,unit:'ч',med:true},
+ {k:'food',n:'Питание',v:r=>r.food.reduce((a,b)=>a+b,0),better:1,unit:'из 6',med:true},
+ {k:'mood',n:'Эмоции',v:r=>r.mood,better:1,unit:'из 5'},
+ {k:'comm',n:'Коммуникация',v:r=>r.init*2+r.speech,better:1,unit:'балл'},
+ {k:'beh',n:'Поведение',v:r=>r.episodes.filter(e=>e.t!=='Стереотипии').reduce((a,e)=>a+e.n,0),better:-1,unit:'эпизодов',med:true},
+];
+const mean=a=>a.reduce((x,y)=>x+y,0)/(a.length||1);
+const sd=a=>{const m=mean(a);return Math.sqrt(mean(a.map(x=>(x-m)**2)))||0;};
+function isCritical(recs,i){ const r=recs[i]; if(r.episodes.some(e=>e.t==='Самоагрессия')) return 'Самоагрессия';
+  const refuse=x=>x&&x.food.filter(f=>f===0).length>=2; if(refuse(r)&&refuse(recs[i-1])) return 'Отказ от еды 2 дня подряд'; return null; }
+// Цвет параметра за день относительно личной базовой линии за предыдущие 28 дней
+function dayColors(recs,i){
+  const out={}; let worst='g';
+  const rank={g:0,y:1,r:2};
+  for(const p of PARAMS){
+    const base=recs.slice(Math.max(0,i-28),i).map(p.v); if(base.length<5){out[p.k]='y';continue;}
+    const m=mean(base), band=Math.max(0.5*sd(base), p.k==='beh'?0.5:0.25);
+    const diff=(p.v(recs[i])-m)*p.better;
+    let c = diff>band?'g':diff<-band?'w':'y';
+    if(c==='w'){ const bprev=recs.slice(Math.max(0,i-29),i-1).map(p.v); const mp=mean(bprev), bp=Math.max(0.5*sd(bprev),p.k==='beh'?0.5:0.25);
+      const prevWorse=i>0 && (p.v(recs[i-1])-mp)*p.better<-bp; c=prevWorse?'r':'y'; }
+    out[p.k]=c; if(rank[c]>rank[worst]) worst=c;
+  }
+  const gs=PARAMS.filter(p=>out[p.k]==='g').length; let day=worst==='r'?'r':(gs>=2?'g':'y');
+  const crit=isCritical(recs,i); if(crit){day='r'; out.crit=crit;}
+  out.day=day; return out;
+}
+// Поиск повторяющихся связей «фактор → исход» за последние 60 дней наблюдений
+const FACTORS=[
+ {k:'sleep',n:'сон меньше 8 часов',f:r=>r.sleepH<8},{k:'noise',n:'шумная обстановка',f:r=>r.env.noise},
+ {k:'schedule',n:'смена расписания',f:r=>r.env.schedule},{k:'newPerson',n:'новый человек',f:r=>r.env.newPerson}];
+const OUTCOMES=[
+ {k:'aggr',n:'эпизоды агрессии',f:r=>r.episodes.some(e=>e.t==='Агрессия')},
+ {k:'food',n:'трудности с едой',f:r=>r.food.some(x=>x===0)||r.food.filter(x=>x===1).length>=2},
+ {k:'mood',n:'сниженное настроение',f:r=>r.mood<=2}];
+const TH={minF:8,ratio:2,parts:2};
+function findLinks(cid){
+  const recs=OBS[cid], win=recs.filter(r=>r.date<TODAY).slice(-60), out=[]; // ночной расчёт по данным до вчерашнего дня включительно
+  for(const F of FACTORS) for(const O of OUTCOMES){
+    const withF=win.filter(F.f), noF=win.filter(r=>!F.f(r));
+    const a=withF.filter(O.f).length, b=noF.filter(O.f).length;
+    const pF=a/(withF.length||1), pN=b/(noF.length||1);
+    const co=win.map((r,j)=>F.f(r)&&O.f(r)?j:-1).filter(j=>j>=0); const parts=new Set(co.map(j=>Math.floor(j/20))).size;
+    const ratio=pN>0?pF/pN:(pF>0?99:0);
+    const ok=withF.length>=TH.minF && ratio>=TH.ratio && pF>=0.5 && parts>=TH.parts;
+    if(ok) out.push({id:`H-${cid}-${F.k}-${O.k}`,cid,F,O,nF:withF.length,a,nN:noF.length,b,pF,pN,ratio,
+      days:win.filter(F.f).map(r=>({r,hit:O.f(r)})), parts});
+  }
+  return out.sort((x,y)=>y.ratio-x.ratio);
+}
+const pct=x=>Math.round(x*100)+'%';
+const r1=x=>(Math.round(x*10)/10).toLocaleString('ru-RU');
+// Текст подсказки: в продукте формулирует GigaChat по результатам расчёта; здесь — шаблон
+const ACTIONS={
+ 'sleep-aggr':'В дни недосыпа (родитель отмечает сон утром) снизить нагрузку в первой половине дня, заранее предупреждать о переходах, предложить сенсорную паузу. Обсудить с семьёй режим сна.',
+ 'noise-food':'Во время еды сажать ребёнка в тихой зоне или давать наушники; в шумные дни предлагать приём пищи до общего обеда.',
+ 'noise-mood':'Планировать шумные активности после спокойных; иметь тихий угол для восстановления.',
+};
+function hintText(h){
+  const c=C[h.cid]; const name=c.name.split(' ')[0];
+  return `У ${name==='Миша'?'Миши':name==='Алиса'?'Алисы':'Тимура'} в дни, когда был фактор «${h.F.n}», ${h.O.n} отмечались в ${h.a} из ${h.nF} дней (${pct(h.pF)}). В остальные дни — в ${h.b} из ${h.nN} (${pct(h.pN)}). Вероятность в ${r1(h.ratio)} раза выше.`;
+}
+// Матрица доступа
+const ACCESS={
+ tutor:{obs:'полный',les:'чтение',ai:'полный',anam:'по согласию'},
+ spec:{obs:'полный',les:'полный',ai:'подтверждение',anam:'по согласию'},
+ parent:{obs:'сводки и динамика',les:'результаты, видео',ai:'одобренные рекомендации',anam:'свой ребёнок'},
+ doctor:{obs:'сон, питание, поведение',les:'—',ai:'по мед. параметрам',anam:'полный'}};
+// ===== Интерфейс прототипа =====
+const S={role:'tutor',view:'home',cid:null,period:20,form:null,parentSleep:{},hints:{},notifs:[],log:[],tasks:{c1:[],c2:[],c3:[]},toast:null,sheet:null,docCid:'c1'};
+const ROLES={tutor:'Тьютор',spec:'Специалист',parent:'Родитель',doctor:'Врач'};
+const AVC={c1:'#D9733B',c2:'#3D6E8C',c3:'#2F6B4F'};
+const $=q=>document.querySelector(q);
+const colName={g:'прогресс',y:'стабильно',r:'риск'};
+const cc=c=>({g:'cg',y:'cy',r:'cr'})[c];
+function recs(cid){return OBS[cid];}
+function lastIdx(cid){return recs(cid).length-1;}
+function todayRec(cid){const r=recs(cid); const l=r[r.length-1]; return l.date.getTime()===TODAY.getTime()?l:null;}
+function logA(t){const now=new Date(); S.log.unshift(`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')} · ${ROLES[S.role]} · ${t}`); S.log=S.log.slice(0,8);}
+function toast(t){S.toast=t; render(); setTimeout(()=>{S.toast=null;render();},3200);}
+function setRole(r){S.role=r; S.view='home'; S.cid=null; S.sheet=null; logA('вход в кабинет'); render();}
+function go(v,cid){S.view=v; if(cid!==undefined) S.cid=cid; S.sheet=null; if(cid) logA(`открыт профиль ${C[cid].name}`); render(); const b=$('.body'); if(b) b.scrollTop=0;}
+// ---------- общие блоки ----------
+function kidRow(c,sub,onclick){ const i=lastIdx(c.id), col=dayColors(recs(c.id),i).day;
+  return `<div class="card kid" onclick="${onclick}"><div class="av" style="background:${AVC[c.id]}">${c.name[0]}</div><div class="t"><b>${c.name} · ${c.age}</b><span class="small muted">${sub}</span></div><span class="chip ${cc(col)}">${colName[col]}</span></div>`; }
+function spark(vals,color){ const w=120,h=26,mx=Math.max(...vals),mn=Math.min(...vals),rg=(mx-mn)||1;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline fill="none" stroke="${color}" stroke-width="2" points="${vals.map((v,i)=>`${(i/(vals.length-1||1)*(w-4)+2).toFixed(1)},${(h-3-(v-mn)/rg*(h-6)).toFixed(1)}`).join(' ')}"/></svg>`; }
+function dynamics(cid,opt={}){
+  const R=recs(cid), n=R.length, P=Math.min(S.period,n); const idx=[...Array(P).keys()].map(k=>n-P+k);
+  const cols=idx.map(i=>dayColors(R,i)); const last=cols[cols.length-1];
+  const params=PARAMS.filter(p=>!opt.med||p.med);
+  let h=`<div class="seg">${[[5,'Неделя'],[20,'Месяц'],[60,'Квартал']].map(([v,l])=>`<button class="${S.period===v?'on':''}" onclick="S.period=${v};render()">${l}</button>`).join('')}</div>
+  <div class="small muted">${fmtD(R[n-P].date)} — ${fmtD(R[n-1].date)} · ${P} дней наблюдений</div>
+  <div class="ribbon" style="grid-template-columns:repeat(${P},1fr)">${cols.map((c,k)=>`<i class="${c.day}" title="${fmtD(R[idx[k]].date)}: ${colName[c.day]}${c.crit?' · '+c.crit:''}"></i>`).join('')}</div>
+  <div class="small muted" style="margin-bottom:6px"><span class="dot g"></span> прогресс <span class="dot y"></span> стабильно <span class="dot r"></span> риск — каждый день к личной норме ребёнка за 28 дней</div>`;
+  h+=`<div class="card">${params.map(p=>{const vals=idx.map(i=>p.v(R[i])); const c=last[p.k]; const avg=mean(vals);
+    return `<div class="prow"><span class="n">${p.n}</span><span class="dot ${c}"></span><span class="sp">${spark(vals,c==='r'?'#D5534C':c==='g'?'#3E9B5B':'#B08A2E')}</span><span class="small muted" style="width:70px;text-align:right">ср. ${r1(avg)} ${p.unit}</span></div>`;}).join('')}
+    ${last.crit?`<div class="warn" style="background:var(--r2)">⚠ Критическое событие: ${last.crit}</div>`:''}</div>`;
+  return h;
+}
+// ---------- ТЬЮТОР ----------
+function tutorHome(){
+  const unfilled=CHILDREN.filter(c=>!todayRec(c.id)).length;
+  return `<div class="small muted" style="margin:0 2px 8px">Сегодня, ${fmtDL(TODAY)} · ${WD[TODAY.getDay()]}. Не заполнено карточек: <b>${unfilled}</b></div>`+
+   CHILDREN.map(c=>kidRow(c, todayRec(c.id)?'✓ карточка дня заполнена':(S.parentSleep[c.id]?`сон отмечен родителем: ${S.parentSleep[c.id]} ч`:'карточка дня не заполнена'), `openForm('${c.id}')`)).join('')+
+   `<div class="card"><h4>Уведомления</h4>${S.notifs.length?S.notifs.map(n=>`<div class="small" style="padding:4px 0">🔔 ${n}</div>`).join(''):'<div class="small muted">Новых нет</div>'}</div>`;
+}
+function openForm(cid){
+  const R=recs(cid), prev=R[R.length-1]; const tr=todayRec(cid);
+  const sl=S.parentSleep[cid]||(cid==='c1'?6.5:8);
+  S.form=tr?JSON.parse(JSON.stringify({...tr,date:null})):{sleepH:sl,sleepQ:sl<8?1:2,sleepSrc:S.parentSleep[cid]?'родитель, 07:40':'со слов родителя',food:[2,2,2],mood:3,init:1,speech:prev.speech,episodes:[],sensory:[],env:{schedule:false,newPerson:false,noise:false,ill:false},comment:'',t0:Date.now()};
+  S.cid=cid; S.view='form'; render(); logA(`открыта карточка дня ${C[cid].name}`);
+}
+function segB(path,opts){ const v=path.split('.').reduce((o,k)=>o[k],S.form);
+  return `<div class="seg">${opts.map(([val,l])=>`<button class="${v===val?'on':''}" onclick="setF('${path}',${JSON.stringify(val)})">${l}</button>`).join('')}</div>`; }
+function setF(path,val){ const ks=path.split('.'); let o=S.form; for(let i=0;i<ks.length-1;i++) o=o[ks[i]]; o[ks[ks.length-1]]=val; render(); }
+function tutorForm(){
+  const f=S.form, c=C[S.cid];
+  const contradictions=[]; const ep=f.episodes.reduce((a,e)=>a+(e.t!=='Стереотипии'?e.n:0),0);
+  if(f.mood>=4 && ep>=3) contradictions.push('Отмечено хорошее настроение, но зафиксировано 3 и больше эпизодов. Проверьте значения.');
+  if(f.food.every(x=>x===0) && !f.env.ill) contradictions.push('Отказ от всех приёмов пищи. Если ребёнок плохо себя чувствует, отметьте «болезнь».');
+  const meals=['Завтрак','Обед','Полдник'];
+  return `<div class="card"><div class="kid"><div class="av" style="background:${AVC[c.id]}">${c.name[0]}</div><div class="t"><b>${c.name}</b><span class="small muted">Карточка дня · ${fmtDL(TODAY)}</span></div></div></div>
+  <div class="card" id="f-sleep"><h4>Сон</h4><div class="seg"><button onclick="setF('sleepH',Math.max(4,S.form.sleepH-0.5))">−</button><button class="on">${r1(f.sleepH)} ч</button><button onclick="setF('sleepH',Math.min(12,S.form.sleepH+0.5))">+</button></div>
+   <span class="pre">предзаполнено: ${f.sleepSrc}</span>${segB('sleepQ',[[0,'плохо'],[1,'беспокойно'],[2,'хорошо']])}</div>
+  <div class="card"><h4>Питание</h4>${meals.map((m,i)=>`<div class="lbl">${m}</div>${segB('food.'+i,[[2,'всё'],[1,'частично'],[0,'отказ']])}`).join('')}</div>
+  <div class="card"><h4>Эмоции</h4>${segB('mood',[[1,'😣'],[2,'🙁'],[3,'😐'],[4,'🙂'],[5,'😄']])}
+   <div class="lbl">Инициирует контакт</div>${segB('init',[[0,'нет'],[1,'с подсказкой'],[2,'сам']])}<div class="lbl">Речевая активность</div>${segB('speech',[[1,'1'],[2,'2'],[3,'3'],[4,'4'],[5,'5']])}</div>
+  <div class="card" id="f-beh"><h4>Поведение</h4><div class="small muted">Отмечайте в момент эпизода одной кнопкой</div>
+   <div class="seg">${EP_TYPES.map(t=>`<button class="epbtn" onclick="addEp('${t}')">+ ${t}</button>`).join('')}</div>
+   ${f.episodes.map((e,i)=>`<div class="ep"><span><b>${e.t}</b> ×${e.n} · перед этим: ${e.ante}</span><span style="cursor:pointer" onclick="S.form.episodes.splice(${i},1);render()">✕</span></div>`).join('')}</div>
+  <div class="card"><h4>Сенсорика и среда</h4><div class="lbl">Условия дня</div>
+   <div class="seg">${[['noise','шумно'],['schedule','смена расписания'],['newPerson','новый человек'],['ill','болеет']].map(([k,l])=>`<button class="${f.env[k]?'on':''}" onclick="setF('env.${k}',${!f.env[k]})">${l}</button>`).join('')}</div></div>
+  <div class="card"><h4>Комментарий</h4><textarea id="cm" placeholder="Свободно, можно надиктовать голосом" oninput="S.form.comment=this.value">${f.comment}</textarea>
+   <button class="btn ghost sm" style="margin-top:6px" onclick="aiParse()">✦ Разобрать по полям (ИИ)</button>${f.aiSug?`<div class="ai"><b>ИИ предлагает заполнить:</b><br>${f.aiSug.text}<div class="acts"><button class="btn sm" onclick="aiApply()">Подтвердить</button><button class="btn ghost sm" onclick="S.form.aiSug=null;render()">Отклонить</button></div></div>`:''}</div>
+  ${contradictions.map(x=>`<div class="warn">⚠ ${x}</div>`).join('')}
+  <button class="btn full" style="margin-top:10px" id="f-save" onclick="saveForm()">Сохранить</button><div class="small muted" style="text-align:center;margin-top:6px">Правка после сохранения создаёт новую версию, старая остаётся в истории</div>`;
+}
+function addEp(t){ S.sheet={t}; render(); }
+function sheetHtml(){ if(!S.sheet) return ''; const t=S.sheet.t;
+  return `<div class="sheet" onclick="if(event.target===this){S.sheet=null;render()}"><div class="in"><h4 style="margin:0 0 6px">${t}: что было перед этим?</h4><div class="seg">${ANTE.map(a=>`<button onclick="S.form.episodes.push({t:'${t}',n:1,ante:'${a}',dur:2});S.sheet=null;render()">${a}</button>`).join('')}</div><div class="small muted" style="margin-top:8px">Время фиксируется автоматически: ${new Date().toTimeString().slice(0,5)}</div></div></div>`; }
+function aiParse(){ const t=(S.form.comment||'').toLowerCase(); if(!t.trim()){toast('Напишите комментарий, и ИИ предложит разложить его по полям');return;}
+  const sug={}, parts=[];
+  if(/уснул поздно|не выспал|мало спал|плохо спал/.test(t)){sug.sleepQ=0;parts.push('сон: плохо');}
+  if(/оттолкн|удар|толкн|укусил|агресс/.test(t)){sug.ep={t:'Агрессия',ante:/смен|задан|попросил/.test(t)?'Требование':'Не установлено'};parts.push(`эпизод: агрессия, перед этим — ${sug.ep.ante.toLowerCase()}`);}
+  if(/крич|кричал/.test(t)){sug.ep2={t:'Крик',ante:/переключ|переход/.test(t)?'Переход':'Не установлено'};parts.push('эпизод: крик');}
+  if(/вял|устал|груст|плакал/.test(t)){sug.mood=2;parts.push('эмоции: 🙁');}
+  if(/шум|громк/.test(t)){sug.noise=true;parts.push('условия: шумно');}
+  if(/отказал.*(завтрак|обед|еды)|не ел/.test(t)){sug.food=true;parts.push('питание: отказ');}
+  if(/болит|температур|болеет/.test(t)){sug.ill=true;parts.push('условия: болеет');}
+  if(/сама попросила|сам попросил|фраз/.test(t)){sug.init=2;parts.push('контакт: сам');}
+  S.form.aiSug={sug,text:parts.length?parts.join('; '):'новых данных для полей не найдено'}; render(); }
+function aiApply(){ const s=S.form.aiSug.sug, f=S.form; if(s.sleepQ!==undefined)f.sleepQ=s.sleepQ; if(s.ep)f.episodes.push({...s.ep,n:1,dur:2}); if(s.ep2)f.episodes.push({...s.ep2,n:1,dur:2}); if(s.mood)f.mood=s.mood; if(s.noise)f.env.noise=true; if(s.food)f.food=[0,0,f.food[2]]; if(s.ill)f.env.ill=true; if(s.init)f.init=s.init; f.aiSug=null; render(); }
+function saveForm(){
+  const cid=S.cid, R=recs(cid), f=S.form; const tr=todayRec(cid);
+  const rec={...JSON.parse(JSON.stringify(f)),date:new Date(TODAY),author:'Анна Сергеевна (тьютор)',id:tr?tr.id:`OBS-${cid.toUpperCase()}-${String(R.length+1).padStart(3,'0')}`,ver:tr?tr.ver+1:1};
+  delete rec.aiSug; delete rec.t0;
+  if(tr) R[R.length-1]=rec; else R.push(rec);
+  const col=dayColors(R,R.length-1); const secs=Math.max(40,Math.round((Date.now()-(f.t0||Date.now()))/1000));
+  if(col.crit){ S.notifs.unshift(`${C[cid].name}: ${col.crit} (${fmtD(TODAY)})`); }
+  logA(`сохранено наблюдение ${rec.id} v${rec.ver}`);
+  S.view='dyn'; S.period=20; S.form=null;
+  toast(`Сохранено · ${rec.id} · версия ${rec.ver}. Светофор дня: ${colName[col.day]}${col.crit?'. Специалист получил уведомление':''}`);
+}
+// ---------- СПЕЦИАЛИСТ ----------
+function allHints(){ return CHILDREN.flatMap(c=>findLinks(c.id)); }
+function hintState(h){ return S.hints[h.id]||{st:'new'}; }
+function specHome(){
+  const H=allHints().filter(h=>hintState(h).st==='new');
+  return `${S.notifs.length?`<div class="card" style="background:var(--r2);border-color:#F2C9C5"><h4>🔔 Критические события</h4>${S.notifs.map(n=>`<div class="small">${n}</div>`).join('')}</div>`:''}
+  <div class="card" style="cursor:pointer" onclick="go('hints')"><h4>AI-подсказки ждут решения: ${H.length}</h4><div class="small muted">Каждый вывод — с исходными наблюдениями</div></div>`+
+  CHILDREN.map(c=>kidRow(c,`${c.diag} · ИОМ: ${c.iom.length} цели`,`go('profile','${c.id}')`)).join('');
+}
+function hintCard(h){
+  const st=hintState(h); const key=`${h.F.k}-${h.O.k}`;
+  const status={new:'',accepted:'<span class="chip cg">принята</span>',edited:'<span class="chip cs">исправлена и принята</span>',rejected:'<span class="chip cgr">отклонена</span>'}[st.st];
+  return `<div class="card hint" id="hint-${h.id}"><div style="display:flex;justify-content:space-between;gap:6px"><h4>${C[h.cid].name}: ${h.F.n} → ${h.O.n}</h4>${status}</div>
+   <div class="small">${st.text||hintText(h)}</div>
+   <div class="st"><span>Дней с фактором</span><b>${h.a} из ${h.nF} · ${pct(h.pF)}</b><span>Дней без фактора</span><b>${h.b} из ${h.nN} · ${pct(h.pN)}</b><span>Во сколько раз чаще</span><b>${r1(h.ratio)}</b><span>Период</span><b>60 дней наблюдений</b></div>
+   <details ${S.openH===h.id?'open':''} ontoggle="if(this.open)S.openH='${h.id}'"><summary>На каких данных основан вывод (${h.nF} дней)</summary>
+    ${h.days.map(d=>`<div class="drow"><span>${fmtD(d.r.date)} · ${d.r.id}</span><span>${h.F.k==='sleep'?'сон '+r1(d.r.sleepH)+' ч':h.F.n}</span><span>${d.hit?'<b style="color:var(--r)">'+h.O.n.split(' ').slice(-1)[0]+': да</b>':'нет'}</span></div>`).join('')}</details>
+   <div class="small muted" style="margin-top:6px">Это статистическая связь, а не доказанная причина. Решение принимает специалист.</div>
+   <div class="ai"><b>Предлагаемое действие:</b> ${st.action||ACTIONS[key]||'Обсудить на встрече команды сопровождения.'}</div>
+   ${st.st==='new'?`<label class="small" style="display:block;margin-top:8px"><input type="checkbox" id="home-${h.id}" checked> Рекомендация для дома (родитель увидит после принятия)</label>
+   <div class="acts"><button class="btn sm" onclick="decide('${h.id}','accepted')">Принять</button><button class="btn ghost sm" onclick="decide('${h.id}','edited')">Исправить</button><button class="btn ghost sm" style="color:var(--r);border-color:var(--r)" onclick="decide('${h.id}','rejected')">Отклонить</button></div>`:
+   `<div class="small muted" style="margin-top:6px">${st.st==='rejected'?'Причина: '+st.reason:'Добавлено в ИОМ как задача'}${st.home?' · отправлено родителю':''}</div>`}</div>`;
+}
+function decide(id,st){ const h=allHints().find(x=>x.id===id); const home=$('#home-'+id)?.checked;
+  const o={st,home:st!=='rejected'&&home};
+  if(st==='rejected'){ o.reason=prompt('Причина отклонения (нужна для настройки правил):','Связь уже известна и учтена в ИОМ')||'не указана'; }
+  if(st==='edited'){ o.action=prompt('Скорректируйте предлагаемое действие:',ACTIONS[`${h.F.k}-${h.O.k}`]||'')||ACTIONS[`${h.F.k}-${h.O.k}`]; }
+  S.hints[id]=o; if(st!=='rejected') S.tasks[h.cid].push({t:(o.action||ACTIONS[`${h.F.k}-${h.O.k}`]||''),src:`AI-подсказка: ${h.F.n} → ${h.O.n}`,home:o.home});
+  logA(`решение по подсказке ${id}: ${st}`); toast(st==='rejected'?'Подсказка отклонена, причина сохранена для настройки правил':'Подсказка принята и добавлена в ИОМ как задача'+(o.home?'. Родитель увидит рекомендацию':'')); }
+function hintsView(){ const H=allHints(); const m=metrics();
+  return `<div class="card"><div class="small muted">Доля принятых AI-выводов (метрика пилота)</div><div style="font-size:22px;font-weight:700">${pct(m.acc)} <span class="small muted">${m.accN} из ${m.dec}</span></div><div class="bar"><i style="width:${m.acc*100}%"></i></div></div>`+
+  H.map(hintCard).join('')+`<div class="card"><h4>История решений</h4>${DECISIONS.map(d=>`<div class="drow"><span>${d.date} · ${C[d.cid].name}: ${d.title}</span><span>${d.st==='rejected'?'отклонена':'принята'}</span></div>`).join('')}</div>`; }
+function metrics(){ const all=DECISIONS.map(d=>d.st).concat(Object.values(S.hints).map(h=>h.st)); const acc=all.filter(s=>s!=='rejected').length;
+  return {acc:acc/(all.length||1),accN:acc,dec:all.length}; }
+function specProfile(){ const c=C[S.cid]; const L=LESSONS[c.id];
+  return `<div class="card kid"><div class="av" style="background:${AVC[c.id]}">${c.name[0]}</div><div class="t"><b>${c.name} · ${c.age}</b><span class="small muted">${c.diag} · ${c.parent}</span></div></div>
+  <div class="seg"><button class="on">Профиль</button><button onclick="go('dyn')">Динамика</button><button onclick="go('hints')">Подсказки</button></div>
+  <div class="card"><h4>ИОМ: текущие цели</h4>${c.iom.map(g=>`<div class="small" style="margin-top:6px">${g.g}<div class="bar"><i style="width:${g.p}%"></i></div></div>`).join('')}
+   ${S.tasks[c.id].map(t=>`<div class="ai" style="margin-top:8px"><b>Задача из AI-подсказки</b>${t.home?' · для дома':''}<br>${t.t}</div>`).join('')}</div>
+  <div class="card"><h4>Сенсорный профиль</h4><div class="small">${c.sensory}</div></div>
+  <div class="card"><h4>Занятия</h4>${L.map(l=>`<div class="drow" style="font-size:12.5px"><span>${l.d} · ${l.who}<br><span class="muted">${l.goal}</span></span><span style="text-align:right">${l.res}${l.video?'<br><span class="chip cf">▶ видео для дома</span>':''}</span></div>`).join('')}
+   <button class="btn ghost sm" style="margin-top:8px" onclick="toast('В MVP: форма занятия — цель, задания, результат, комментарий, загрузка видео в S3')">+ Добавить занятие</button></div>
+  <div class="card"><h4>Анамнез</h4><div class="small">${c.anamnesis}</div><div class="small muted" style="margin-top:4px">Доступ по согласию законного представителя от 01.09.2026</div></div>`; }
+function specMetrics(){ const m=metrics(); const filled=CHILDREN.map(c=>todayRec(c.id)?1:0).reduce((a,b)=>a+b,0);
+  return `<div class="card"><h4>Метрики пилота</h4><table class="m">
+   <tr><td>Доля принятых AI-выводов</td><td><b>${pct(m.acc)}</b></td></tr>
+   <tr><td>Подсказки со ссылками на исходные данные</td><td><b>100%</b></td></tr>
+   <tr><td>Дни с заполненной картой (сентябрь)</td><td><b>97%</b></td></tr>
+   <tr><td>Сегодня заполнено карточек</td><td><b>${filled} из ${CHILDREN.length}</b></td></tr>
+   <tr><td>Среднее время на карточку</td><td><b>1 мин 50 с</b></td></tr>
+   <tr><td>Время на сводку по ребёнку</td><td><b>меньше 5 с</b></td></tr></table>
+   <div class="small muted" style="margin-top:6px">Сравнение с базой до пилота (ручная обработка) — после замера на неделе 1</div></div>`; }
+// ---------- РОДИТЕЛЬ ----------
+const PCID='c1';
+function parentHome(){ const c=C[PCID]; const v=S.parentSleep[PCID];
+  return `<div class="card kid"><div class="av" style="background:${AVC[PCID]}">${c.name[0]}</div><div class="t"><b>${c.name}</b><span class="small muted">${c.parent}</span></div></div>
+  <div class="card" id="p-sleep"><h4>Как Миша спал сегодня?</h4>${v?`<div>✓ Отмечено: <b>${r1(v)} ч</b>. Тьютор увидит это в карточке дня.</div>`:`<div class="seg">${[6,6.5,7,7.5,8,8.5,9,9.5].map(x=>`<button onclick="S.parentSleep.${PCID}=${x};logA('родитель отметил сон');toast('Спасибо! Сон отмечен, тьютор увидит его в карточке дня');">${r1(x)} ч</button>`).join('')}</div>`}</div>
+  <div class="card"><h4>Сегодня в центре</h4>${todayRec(PCID)?`<div class="small">Карточка дня заполнена тьютором. Состояние: <span class="chip ${cc(dayColors(recs(PCID),lastIdx(PCID)).day)}">${colName[dayColors(recs(PCID),lastIdx(PCID)).day]}</span></div>`:'<div class="small muted">Тьютор заполнит карточку после занятий</div>'}</div>
+  <div class="lock">Подробные записи тьютора об эпизодах поведения доступны после обсуждения со специалистом</div>`; }
+function parentDyn(){ const R=recs(PCID), n=R.length, P=Math.min(S.period,n); const idx=[...Array(P).keys()].map(k=>n-P+k);
+  const text=PARAMS.map(p=>{const cur=mean(idx.slice(-5).map(i=>p.v(R[i]))), prev=mean(idx.slice(0,-5).map(i=>p.v(R[i])));const d=(cur-prev)*p.better;return `<div class="prow"><span class="n">${p.n}</span><span class="dot ${d>0.15?'g':d<-0.15?'r':'y'}"></span><span class="sp small">${d>0.15?'лучше, чем обычно':d<-0.15?'хуже, чем обычно':'без изменений'}</span></div>`;}).join('');
+  return `<div class="small muted">Сравнение последних 5 дней с предыдущим периодом</div><div class="card">${text}</div>`+dynamics(PCID).replace(/<div class="card">[\s\S]*$/,'')+`<div class="card"><h4>Занятия</h4>${LESSONS[PCID].map(l=>`<div class="drow"><span>${l.d} · ${l.goal}</span><span>${l.res}</span></div>`).join('')}</div>`; }
+function parentRec(){ const t=S.tasks[PCID].filter(x=>x.home);
+  return `<div class="card"><h4>Рекомендации для дома</h4>${t.length?t.map(x=>`<div class="ai">${x.t}<div class="small muted" style="margin-top:4px">Согласовано специалистом</div></div>`).join(''):'<div class="small muted">Новых рекомендаций пока нет. Здесь появятся только советы, одобренные специалистом.</div>'}</div>
+  <div class="card"><h4>Видео заданий</h4>${LESSONS[PCID].filter(l=>l.video).map(l=>`<div class="drow"><span>▶ ${l.goal}</span><span class="muted">${l.d}</span></div>`).join('')}</div>`; }
+// ---------- ВРАЧ ----------
+function doctorHome(){ return `<div class="small muted" style="margin-bottom:8px">Пациенты, по которым родители дали согласие на передачу данных</div>`+
+  CHILDREN.map(c=>c.doctorConsent?kidRow(c,'согласие на передачу данных врачу: есть',`S.docCid='${c.id}';go('doc','${c.id}')`):`<div class="card lock">🔒 ${c.name}: нет согласия законного представителя на передачу данных врачу</div>`).join(''); }
+function doctorView(){ const c=C[S.cid], R=recs(c.id), n=R.length; const w=R.slice(-20);
+  const eps=w.reduce((a,r)=>a+r.episodes.filter(e=>e.t!=='Стереотипии').reduce((x,e)=>x+e.n,0),0), self=w.filter(r=>r.episodes.some(e=>e.t==='Самоагрессия')).length, refuse=w.filter(r=>r.food.some(x=>x===0)).length;
+  return `<div class="card kid"><div class="av" style="background:${AVC[c.id]}">${c.name[0]}</div><div class="t"><b>${c.name} · ${c.age}</b><span class="small muted">${c.diag}</span></div></div>
+  <div class="card"><h4>Сводка за 20 дней наблюдений</h4><table class="m"><tr><td>Средний сон</td><td><b>${r1(mean(w.map(r=>r.sleepH)))} ч</b></td></tr><tr><td>Ночей меньше 8 ч</td><td><b>${w.filter(r=>r.sleepH<8).length}</b></td></tr><tr><td>Эпизоды нежелательного поведения</td><td><b>${eps}</b> (${r1(eps/4)} в неделю)</td></tr><tr><td>Самоагрессия</td><td><b>${self}</b></td></tr><tr><td>Дни с отказом от еды</td><td><b>${refuse}</b></td></tr></table></div>`+
+  dynamics(c.id,{med:true})+`<div class="card"><h4>Анамнез</h4><div class="small">${c.anamnesis}</div></div>
+  <button class="btn ghost full" onclick="exportDoc('${c.id}')">Выгрузить сводку для приёма</button>
+  <div class="lock" style="margin-top:10px">Педагогические комментарии, ИОМ и занятия врачу не показываются</div>`; }
+function exportDoc(cid){ const c=C[cid],R=recs(cid).slice(-20); const rows=[['Дата','Сон, ч','Питание (из 6)','Эпизоды','Критические события']].concat(R.map((r,i)=>[fmtD(r.date),r1(r.sleepH),r.food.reduce((a,b)=>a+b,0),r.episodes.filter(e=>e.t!=='Стереотипии').reduce((a,e)=>a+e.n,0),dayColors(recs(cid),recs(cid).length-20+i).crit||'']));
+  const csv='﻿'+`Сводка для врача: ${c.name}, данные на ${fmtD(TODAY)}\r\n`+rows.map(r=>r.join(';')).join('\r\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})); a.download=`Сводка_${c.name.replace(/\W/g,'')||'ребёнок'}.csv`; document.body.appendChild(a); a.click(); a.remove(); logA(`выгрузка сводки ${c.name}`); }
+// ---------- каркас ----------
+const TABS={tutor:[['home','Дети','◉'],['hints','Подсказки','✦']],spec:[['home','Дети','◉'],['hints','Подсказки','✦'],['metrics','Метрики','▤']],parent:[['home','Сегодня','☀'],['pdyn','Динамика','📈'],['prec','Советы','♡']],doctor:[['home','Пациенты','✚']]};
+const TITLES={home:{tutor:'Мои дети',spec:'Сопровождение',parent:'Академия маленьких наук',doctor:'Пациенты'},form:'Карточка дня',dyn:'Динамика',hints:'AI-подсказки',profile:'Профиль ребёнка',metrics:'Метрики пилота',pdyn:'Динамика Миши',prec:'Рекомендации',doc:'Медицинская сводка'};
+function screenBody(){ const r=S.role,v=S.view;
+  if(v==='home') return {tutor:tutorHome,spec:specHome,parent:parentHome,doctor:doctorHome}[r]();
+  if(v==='form') return tutorForm();
+  if(v==='dyn') return `<div class="card kid"><div class="av" style="background:${AVC[S.cid]}">${C[S.cid].name[0]}</div><div class="t"><b>${C[S.cid].name}</b><span class="small muted">Динамика по параметрам</span></div></div>`+dynamics(S.cid)+(r==='tutor'?`<button class="btn ghost full" onclick="openForm('${S.cid}')">Открыть карточку дня</button>`:'');
+  if(v==='hints') return r==='tutor'?allHints().map(hintCard).join('').replace(/<label[\s\S]*?<\/div><\/div>/g,'<div class="small muted" style="margin-top:8px">Решение по подсказке принимает специалист</div></div>'):hintsView();
+  if(v==='profile') return specProfile(); if(v==='metrics') return specMetrics();
+  if(v==='pdyn') return parentDyn(); if(v==='prec') return parentRec(); if(v==='doc') return doctorView();
+}
+function render(){
+  document.querySelectorAll('.roles button').forEach(b=>b.classList.toggle('on',b.dataset.r===S.role));
+  const t=TITLES[S.view]; const title=typeof t==='string'?t:t[S.role];
+  const sc=$('.body')?.scrollTop||0;
+  $('#screen').innerHTML=`<div class="sbar"><span>9:41</span><span>●●● 🔋</span></div><div class="top">${S.view!=='home'&&!TABS[S.role].some(x=>x[0]===S.view)?`<button class="back" onclick="go(S.role==='spec'&&S.view!=='profile'&&S.cid?'profile':'home')">‹</button>`:''}<h2>${title}</h2><span class="chip cgr">${ROLES[S.role]}</span></div>
+   <div class="body">${screenBody()}</div><div class="tabs">${TABS[S.role].map(([k,l,i])=>`<button class="${S.view===k?'on':''}" onclick="go('${k}',null)"><span class="i">${i}</span>${l}</button>`).join('')}</div>${sheetHtml()}${S.toast?`<div class="toast">${S.toast}</div>`:''}`;
+  const b=$('.body'); if(b && S.keepScroll) b.scrollTop=sc;
+  renderSide();
+}
+function renderSide(){
+  const info={tutor:['Тьютор','Ежедневно заполняет карточку по каждому ребёнку: сон уже внесён родителем, остальное — выбором из вариантов. Видит динамику и AI-подсказки, решение по ним принимает специалист.'],
+   spec:['Специалист сопровождения','Видит полную картину: профиль, ИОМ, занятия, динамику. Принимает, исправляет или отклоняет AI-подсказки; принятые становятся задачами ИОМ, а советы для дома уходят родителю.'],
+   parent:['Родитель','Утром отмечает сон. Видит понятную динамику, результаты занятий и только одобренные специалистом рекомендации. Подробные записи об эпизодах — после обсуждения со специалистом.'],
+   doctor:['Врач','Видит медицинские параметры за период и анамнез только по детям, чьи родители дали согласие на передачу данных. Педагогические данные скрыты. Может выгрузить сводку к приёму.']}[S.role];
+  $('#left').innerHTML=`<h3>${info[0]}</h3><p>${info[1]}</p><h3 style="margin-top:14px">Права доступа</h3><table class="acc"><tr><th>Данные</th>${Object.keys(ROLES).map(k=>`<th class="${k===S.role?'cur':''}">${ROLES[k]}</th>`).join('')}</tr>
+   ${[['obs','Наблюдения'],['les','Занятия и ИОМ'],['ai','AI-подсказки'],['anam','Анамнез']].map(([k,l])=>`<tr><td>${l}</td>${Object.keys(ROLES).map(r=>`<td class="${r===S.role?'cur':''}">${ACCESS[r][k]}</td>`).join('')}</tr>`).join('')}</table>`;
+  $('#right').innerHTML=`<h3>Как устроен анализ</h3><p>Светофор: каждый день ребёнка сравнивается с его личной нормой за предыдущие 28 дней.</p><p>Связи «фактор → исход» ищет статистика за 60 дней наблюдений: фактор не меньше ${TH.minF} раз, разница не меньше чем в ${TH.ratio} раза, повтор на разных отрезках периода. GigaChat только формулирует вывод простым языком, данные передаются без ФИО.</p>
+   <h3 style="margin-top:14px">Журнал доступа</h3><div class="log">${S.log.length?S.log.map(l=>`<div>${l}</div>`).join(''):'<div class="muted">Здесь фиксируется каждое обращение к данным</div>'}</div>
+   <p class="small muted" style="margin-top:12px">Демонстрационный прототип. Данные синтетические, имена условные.</p>`;
+}
+// ---------- демо-сценарий ----------
+const DEMO=[
+ {s:'Шаг 1 из 4 · Наблюдение',h:'Тьютор вносит наблюдение',p:'Утром мама отметила, что Миша спал 6,5 часа, и это уже есть в карточке. Тьютор отмечает эпизод агрессии одной кнопкой, а комментарий ИИ раскладывает по полям. Заполнение занимает около двух минут.',run:()=>{S.role='tutor';S.parentSleep.c1=6.5;openForm('c1');S.form.comment='С утра вялый, мама сказала, что уснул поздно. На математике оттолкнул соседа, когда попросили сменить задание.';S.form.episodes.push({t:'Агрессия',n:1,ante:'Требование',dur:2});S.form.mood=2;render();},hl:'#f-beh'},
+ {s:'Шаг 2 из 4 · Анализ',h:'Система сохраняет и пересчитывает',p:'Запись получает ID, автора и версию. Светофор дня пересчитывается относительно личной нормы Миши. Ухудшение второй день подряд даёт красный сигнал.',run:()=>{saveForm();},hl:'.ribbon'},
+ {s:'Шаг 3 из 4 · Динамика',h:'Динамика за месяц',p:'Лента цветных дней и графики по параметрам. Видно, что красные дни совпадают с плохим сном. Врач увидит только медицинские параметры, родитель — понятную сводку.',run:()=>{S.view='dyn';S.cid='c1';S.period=20;render();},hl:'.card:nth-of-type(2)'},
+ {s:'Шаг 4 из 4 · Подсказка',h:'AI-подсказка с исходными данными',p:'За 60 дней агрессия была в 10 из 14 дней недосыпа (71%) и в 7 из 46 остальных (15%), то есть в 4,7 раза чаще. Специалист раскрывает исходные дни и принимает решение. Принятая подсказка становится задачей ИОМ и советом для родителя.',run:()=>{S.role='spec';S.view='hints';S.openH='H-c1-sleep-aggr';render();},hl:'#hint-H-c1-sleep-aggr'},
+];
+let di=-1; function demo(i){ di=i; document.querySelectorAll('.hl').forEach(e=>e.classList.remove('hl')); const d=$('#demo');
+  if(i<0||i>=DEMO.length){d.style.display='none';return;} DEMO[i].run(); setTimeout(()=>{const e=$(DEMO[i].hl); if(e){e.classList.add('hl'); e.scrollIntoView({block:'center',behavior:'smooth'});}},120);
+  d.style.display='block'; d.innerHTML=`<div class="s">${DEMO[i].s}</div><h4>${DEMO[i].h}</h4><p>${DEMO[i].p}</p><div class="row"><button onclick="demo(-1)">Закрыть</button>${i>0?`<button onclick="demo(${i-1})">Назад</button>`:''}<button class="go" onclick="demo(${i+1})">${i<DEMO.length-1?'Далее':'Готово'}</button></div>`; }
+document.querySelectorAll('.roles button').forEach(b=>b.onclick=()=>setRole(b.dataset.r));
+render();
+</script></body></html>
